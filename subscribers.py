@@ -140,8 +140,8 @@ def subs():
     imglbl=Label(subscribers,image=img_tk)
     imglbl.place(x=0,y=0,relwidth=1,relheight=1)
 
-    f1=tk.Frame(subscribers,background="#797979")
-    f2=tk.Frame(subscribers,background="#797979")
+    f1=customtkinter.CTkFrame(subscribers,fg_color="#797979",width=350,height=100)
+    f2=customtkinter.CTkFrame(subscribers,fg_color="#797979",width=700,height=100)
 
    # tree view for traversing the database
     trv = Treeview(subscribers, columns=(1, 2, 3, 4, 5, 6, 7,8), show="headings", height="10", selectmode='browse')
@@ -179,55 +179,55 @@ def subs():
     update_func(rows)
 
     # search section
-    lbl = Label(f1, text="Search",background="#797979")
-    lbl.pack(side=tk.LEFT, padx=8,pady=2)
-    ent = Entry(f1, textvariable=q)
-    ent.pack(side=tk.LEFT, padx=6)
-    btn = tk.Button(f1, text="Search", command=search_func,background="#ffa200")
-    btn.pack(side=tk.LEFT, padx=10)
-    Cbtn = tk.Button(f1, text='Clear',command=clear_func,background="#ffa200")
-    Cbtn.pack(side=tk.LEFT, padx=10)
+    a=customtkinter.CTkLabel(f1,text="Enter Name")
+    a.place(x=20,y=10)
+    ent = customtkinter.CTkEntry(f1, textvariable=q)
+    ent.place(x=120,y=10)
+    btn = customtkinter.CTkButton(f1, text="Search", command=search_func,fg_color="#ffa200",width=60)
+    btn.place(x=120,y=50)
+    Cbtn = customtkinter.CTkButton(f1, text='Clear',command=clear_func,fg_color="#ffa200",width=60)
+    Cbtn.place(x=200,y=50)
  # User Data Section
     trv.bind('<Double 1>', getrow)
 
     # 4 data entry
-    lbl1 = Label(f2, text="Customer ID",background="#797979")
+    lbl1 = customtkinter.CTkLabel(f2, text="Customer ID",bg_color="#797979")
     lbl1.grid(row=0, column=0, padx=5, pady=3)
-    ent1 = Entry(f2, textvariable=t1)
+    ent1 = customtkinter.CTkEntry(f2, textvariable=t1)
     ent1.grid(row=0, column=1, padx=5, pady=3)
     ent1.configure(state=DISABLED)
 
-    lbl2 = Label(f2, text="Name",background="#797979")
+    lbl2 = customtkinter.CTkLabel(f2, text="Name",bg_color="#797979")
     lbl2.grid(row=1, column=0, padx=5, pady=3)
-    ent2 = Entry(f2, textvariable=t2)
+    ent2 = customtkinter.CTkEntry(f2, textvariable=t2)
     ent2.grid(row=1, column=1, padx=5, pady=3)
     ent2.configure(state=DISABLED)
 
-    lbl3 = Label(f2, text="Package",background="#797979")
+    lbl3 = customtkinter.CTkLabel(f2, text="Package",bg_color="#797979")
     lbl3.grid(row=2, column=0, padx=5, pady=3)
-    ent3 = Entry(f2, textvariable=t3)
+    ent3 = customtkinter.CTkEntry(f2, textvariable=t3)
     ent3.grid(row=2, column=1, padx=5, pady=3)
     ent3.configure(state=DISABLED)
 
-    lbl4 = Label(f2, text="months",background="#797979")
+    lbl4 = customtkinter.CTkLabel(f2, text="Months",bg_color="#797979")
     lbl4.grid(row=3, column=0, padx=5, pady=3)
-    ent4 = Entry(f2, textvariable=t4)
+    ent4 = customtkinter.CTkEntry(f2, textvariable=t4)
     ent4.grid(row=3, column=1, padx=5, pady=3)
 
     # 3 Buttons for modifications
-    up_btn = tk.Button(f2, text="Update months",command=update_customer,background="#ffa200")
-    add_btn =tk.Button(f2, text="Reward months",command=reward,background="#ffa200")
-    delete_btn = tk.Button(f2, text="Cancel subscription",command=delete_customer,background="#ffa200")
+    up_btn = customtkinter.CTkButton(f2, text="Update months",command=update_customer,fg_color="#ffa200")
+    add_btn =customtkinter.CTkButton(f2, text="Reward months",command=reward,fg_color="#ffa200")
+    delete_btn = customtkinter.CTkButton(f2, text="Cancel subscription",command=delete_customer,fg_color="#ffa200")
     # add fuction here to return to main page
-    Exit =tk.Button(f2, text="EXIT to main menu", command=exit_func,background="#ffa200")
+    Exit =customtkinter.CTkButton(f2, text="EXIT to main menu", command=exit_func,fg_color="#ffa200")
 
-    add_btn.grid(row=4, column=0, padx=5, pady=3)
-    up_btn.grid(row=4, column=1, padx=5, pady=3)
-    delete_btn.grid(row=4, column=2, padx=5, pady=3)
-    Exit.grid(row=4, column=3, padx=10, pady=3)
+    add_btn.grid(row=0, column=5,padx=10,pady=10)
+    up_btn.grid(row=1, column=5, padx=10, pady=10)
+    delete_btn.grid(row=2, column=5, padx=10, pady=10)
+    Exit.grid(row=3, column=5, padx=10, pady=10)
 
 
-    f1.place(x=1080,y=228)
+    f1.place(x=1052,y=228)
     f2.place(x=0,y=220)
 
     subscribers.mainloop()
