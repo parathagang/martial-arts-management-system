@@ -39,6 +39,10 @@ def login(user_type, home_page_func):
     conn = sqlite3.connect("users.db")
     cursor = conn.cursor()
 
+    if not entered_username or not entered_password:
+        messagebox.showerror("Error:","Both username and password are required.")
+        return False
+    
     if user_type == "customer":
         cursor.execute("SELECT * FROM customers WHERE username=? AND password=?", (entered_username, entered_password))
     elif user_type == "admin":
