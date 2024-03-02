@@ -9,6 +9,7 @@ from PIL import ImageTk,Image
 import home_page
 import customtkinter
 from customtkinter import *
+import re
 customtkinter.set_appearance_mode("System")
 customtkinter.set_default_color_theme("green")
 def subs():
@@ -30,6 +31,11 @@ def subs():
         if not q2:
             messagebox.showerror("Error", "Search query cannot be empty.")
             return
+
+        if not re.match("^[A-Za-z]+$", q2):
+            messagebox.showerror("Error", "Invalid characters in the name. Please use only A-Z and a-z.")
+            return
+
 
         query = "SELECT id, name, age, joindate, subtype, fees, months, packagesub FROM subscribers WHERE name LIKE ?"
         cursor.execute(query, ('%' + q2 + '%',))
@@ -57,13 +63,18 @@ def subs():
 
     # this function is made for updating the remaining months of the subscribers
     def update_customer():
-        months = t4.get()
-        
+        months=t4.get()  
 
     # Check if 'months' field is empty
         if not months:
-            messagebox.showerror("Error", "Please select a record first.")
+            messagebox.showerror("Error", "Please enter a record first.")
             return
+        
+        try:
+            months=float(t4.get())
+        except:
+            messagebox.showerror("Error","Please enter a floating point number for months.")
+            return       
         
         id = t1.get()
         Mydb = sqlite3.connect("app.db")

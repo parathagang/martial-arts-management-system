@@ -77,11 +77,25 @@ def add():
         selected_package.set(package_dict.get(package_var.get(), ''))
 
     def submit():
+        id_val=en1.get()
+        name_val=en2.get()
+        age_val=en3.get()
+        joindate_val=en4.get()
+        fees_val=en4.get()
+        package_type=en5.get()
+        months_val=en7.get()
+        
+        #Checking for empty fields
+        if not all([id_val,name_val,age_val,joindate_val,fees_val,package_type,package_num,months_val]):
+            messagebox.showerror("Error","Please fill all the details")
+            return
+        
         try:
             id_val = int(en1.get())
         except ValueError:
             messagebox.showerror("Error", "Invalid data type for ID. Please enter an integer.")
             return
+
 
         # Check if ID already exists
         conn = sqlite3.connect('app.db')
@@ -124,6 +138,11 @@ def add():
         except ValueError:
             messagebox.showerror("Error", "Invalid data type for months. Please enter a floating-point number.")
             return
+        
+            if not id_val or not name_val or not age_val or not joindate_val or not fees_val or not months_val:
+                messagebox.showerror("Error","Please Fill all the boxes")
+                return
+    
 
         total_fees=fees_val*months_val
         conn = sqlite3.connect('app.db')
@@ -152,6 +171,8 @@ def add():
         en4.delete(0, END)
         en5.delete(0, END)
         en7.delete(0, END)       
+        
+   
 
     # ----------------------------------------------------------------------
 
@@ -206,7 +227,7 @@ def add():
     v2_rbtn = IntVar()
     v2_rbtn.set(1)
 
-    package_type = ["", "Muay Thai", "Taekwondo", "Kung Fu", "Kickboxing", "Karate", "Judo", "Boxing"]
+    package_type = ["\t\t", "Muay Thai", "Taekwondo", "Kung Fu", "Kickboxing", "Karate", "Judo", "Boxing"]
     selected_package = StringVar()
     selected_package.set('')
     # combo3 = OptionMenu(root, selected_package, *package_type, command=update_package_num)
